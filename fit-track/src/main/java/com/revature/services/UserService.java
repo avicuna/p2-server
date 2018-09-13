@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.revature.models.User;
+import com.revature.projections.BasicUserProjection;
 import com.revature.repos.UserRepo;
 
 
@@ -19,8 +20,10 @@ public class UserService {
 		return ur.findAll();
 	}
 	
+	public BasicUserProjection login(String username, String password) {
+		return ur.findByUsernameAndPassword(username, password);
+	}
 	public int save(User u) {
 		return ur.saveAndFlush(u).getId();
-	}
-	
+	}	
 }
