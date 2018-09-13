@@ -18,4 +18,9 @@ public class UserService {
 	public List<User> findAll() {
 		return ur.findAll();
 	}
+	
+	public int save(User u) {
+		return ur.saveAndFlush(u).getId();
+	}
+	
 }
