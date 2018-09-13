@@ -24,13 +24,13 @@ public class User {
 	private String email;
 	private int height;
 	private int weight;
-	private int gender;
+	private String gender;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public User(int id, String firstname, String lastname, String username, String password, String email, int height,
-			int weight, int gender) {
+			int weight, String gender) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -90,19 +90,20 @@ public class User {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + gender;
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + height;
 		result = prime * result + id;
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
@@ -130,7 +131,10 @@ public class User {
 				return false;
 		} else if (!firstname.equals(other.firstname))
 			return false;
-		if (gender != other.gender)
+		if (gender == null) {
+			if (other.gender != null)
+				return false;
+		} else if (!gender.equals(other.gender))
 			return false;
 		if (height != other.height)
 			return false;
