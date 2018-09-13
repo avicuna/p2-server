@@ -23,4 +23,7 @@ public class UserService {
 	public BasicUserProjection login(String username, String password) {
 		return ur.findByUsernameAndPassword(username, password);
 	}
+	public int save(User u) {
+		return ur.saveAndFlush(u).getId();
+	}	
 }
