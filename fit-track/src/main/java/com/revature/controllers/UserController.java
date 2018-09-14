@@ -26,19 +26,20 @@ public class UserController {
 	@Autowired
 	private UserWorkoutService uws;
 	
-	@GetMapping
+	
+	@GetMapping 
 	public List<User> findAll() {
 		System.out.println("finding all users");
 		return us.findAll();
 	}
 	
-	@GetMapping("/workouts/{userId}")
+	@GetMapping("/workouts/{userId}") 
 	public List<UserWorkout> findAllWorkouts(@PathVariable int userId) {
 		System.out.println("finding all user's workouts");
 		return uws.findAllWorkouts(userId);
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/login") 
 	public BasicUserProjection login(@RequestBody User u) {
 		return us.login(u.getUsername(), u.getPassword());
 	}
