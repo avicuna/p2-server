@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.FullWorkout;
 import com.revature.models.User;
 import com.revature.models.UserExercise;
 import com.revature.models.UserWorkout;
@@ -65,12 +66,12 @@ public class UserController {
 	}
 	
 	@PostMapping("/createworkout")
-	public int postWorkout(@RequestBody UserWorkout workout,@RequestBody List<UserExercise> exercises) {
-		int id = workoutService.postWorkout(workout);
-		for (UserExercise exercise: exercises ) {
+	public int postWorkout(@RequestBody FullWorkout fullWorkout) {
+		int id = workoutService.postWorkout(fullWorkout.getUserWorkout());
+		for (UserExercise exercise: fullWorkout.getExercises() ) {
 			exercise.setUserWorkoutId(id);
 		}
-		ues.postUserExercises(exercises);
+		ues.postUserExercises(fullWorkout.getExercises());
 		return id;
 	}
 	
