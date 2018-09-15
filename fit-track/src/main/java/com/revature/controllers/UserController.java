@@ -15,6 +15,7 @@ import com.revature.models.User;
 import com.revature.models.UserExercise;
 import com.revature.models.UserWorkout;
 import com.revature.projections.BasicUserProjection;
+import com.revature.services.UserExerciseService;
 import com.revature.services.UserService;
 import com.revature.services.UserWorkoutService;
 
@@ -32,6 +33,8 @@ public class UserController {
 	@Autowired
 	private UserWorkoutService workoutService;
 	
+	@Autowired
+	private UserExerciseService ues;
 	
 	@GetMapping 
 	public List<User> findAll() {
@@ -62,9 +65,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/createworkout")
-	public int postWorkout(@RequestBody UserWorkout workout) {
-		
-		return workoutService.postWorkout(workout);
+	public int postWorkout(@RequestBody UserWorkout workout,@RequestBody List<UserExercise> exercises) {
+		int id = workoutService.postWorkout(workout);
+		for (UserExercise exercise: exercises ) {
+			exercise.setUserWorkoutId(id);
+		}
+		ues.postUserExercises(exercises);
+		return id;
 	}
 	
 }

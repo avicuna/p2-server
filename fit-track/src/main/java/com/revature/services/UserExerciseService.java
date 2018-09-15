@@ -18,4 +18,9 @@ public class UserExerciseService {
 	public List<UserExercise> findAll() {
 		return uer.findAll();
 	}
+	public void postUserExercises(List<UserExercise> ue) {
+		for (UserExercise exercise: ue) {
+		 uer.saveAndFlush(exercise);
+		}
+	}
 }
