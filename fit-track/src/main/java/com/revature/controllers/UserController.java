@@ -29,6 +29,9 @@ public class UserController {
 	@Autowired
 	private UserWorkoutService uws;
 	
+	@Autowired
+	private UserWorkoutService workoutService;
+	
 	
 	@GetMapping 
 	public List<User> findAll() {
@@ -56,6 +59,12 @@ public class UserController {
 	@PostMapping
 	public int save(@RequestBody User user) {
 		return us.save(user);
+	}
+	
+	@PostMapping("/createworkout")
+	public int postWorkout(@RequestBody UserWorkout workout) {
+		
+		return workoutService.postWorkout(workout);
 	}
 	
 }

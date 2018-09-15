@@ -27,5 +27,9 @@ public class UserWorkoutService {
 		return uer.findByUserWorkoutId(workoutId);
 	}
 	
+	public int postWorkout(UserWorkout uw) {
+		
+		return uwr.saveAndFlush(uw).getId();
+	}
 
 }

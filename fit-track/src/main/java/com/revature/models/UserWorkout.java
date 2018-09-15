@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,7 +31,8 @@ public class UserWorkout {
 	@Column(name="workout_id")
 	private int workoutId;
 	@Column(name="date_")
-	private String date;
+	java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+//	private String date;
 	@Column(name="workout_number")
 	private int number;
 	
@@ -43,25 +46,24 @@ public class UserWorkout {
 
 	
 	
-
 	public UserWorkout() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public UserWorkout(int id, int userId, int workoutId, String date, int number, User user,
+
+	public UserWorkout(int id, int userId, int workoutId, Date sqlDate, int number, User user,
 			List<UserExercise> userExercises) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.workoutId = workoutId;
-		this.date = date;
+		this.sqlDate = sqlDate;
 		this.number = number;
 		this.user = user;
 		this.userExercises = userExercises;
 	}
-
 
 
 
@@ -71,11 +73,9 @@ public class UserWorkout {
 
 
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 
 
@@ -85,11 +85,9 @@ public class UserWorkout {
 
 
 
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 
 
 
@@ -99,25 +97,21 @@ public class UserWorkout {
 
 
 
-
 	public void setWorkoutId(int workoutId) {
 		this.workoutId = workoutId;
 	}
 
 
 
-
-	public String getDate() {
-		return date;
+	public java.sql.Date getSqlDate() {
+		return sqlDate;
 	}
 
 
 
-
-	public void setDate(String date) {
-		this.date = date;
+	public void setSqlDate(java.sql.Date sqlDate) {
+		this.sqlDate = sqlDate;
 	}
-
 
 
 
@@ -127,11 +121,9 @@ public class UserWorkout {
 
 
 
-
 	public void setNumber(int number) {
 		this.number = number;
 	}
-
 
 
 
@@ -141,11 +133,9 @@ public class UserWorkout {
 
 
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 
 
@@ -155,11 +145,9 @@ public class UserWorkout {
 
 
 
-
 	public void setUserExercises(List<UserExercise> userExercises) {
 		this.userExercises = userExercises;
 	}
-
 
 
 
@@ -167,16 +155,15 @@ public class UserWorkout {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + number;
+		result = prime * result + ((sqlDate == null) ? 0 : sqlDate.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((userExercises == null) ? 0 : userExercises.hashCode());
 		result = prime * result + userId;
 		result = prime * result + workoutId;
 		return result;
 	}
-
 
 
 
@@ -189,14 +176,14 @@ public class UserWorkout {
 		if (getClass() != obj.getClass())
 			return false;
 		UserWorkout other = (UserWorkout) obj;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
 		if (id != other.id)
 			return false;
 		if (number != other.number)
+			return false;
+		if (sqlDate == null) {
+			if (other.sqlDate != null)
+				return false;
+		} else if (!sqlDate.equals(other.sqlDate))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -217,17 +204,12 @@ public class UserWorkout {
 
 
 
-
 	@Override
 	public String toString() {
-		return "UserWorkout [id=" + id + ", userId=" + userId + ", workoutId=" + workoutId + ", date=" + date
+		return "UserWorkout [id=" + id + ", userId=" + userId + ", workoutId=" + workoutId + ", sqlDate=" + sqlDate
 				+ ", number=" + number + ", user=" + user + ", userExercises=" + userExercises + "]";
 	}
 
 
-	
-	
-
-	
 	
 }

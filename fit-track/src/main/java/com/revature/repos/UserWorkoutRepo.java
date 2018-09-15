@@ -9,4 +9,5 @@ import com.revature.models.UserWorkout;
 public interface UserWorkoutRepo extends JpaRepository<UserWorkout, Integer>{
 	
 	List<UserWorkout> findByUserId(int userId);
+	
 }
