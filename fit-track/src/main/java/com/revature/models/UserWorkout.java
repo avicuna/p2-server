@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,6 +38,10 @@ public class UserWorkout {
 	@JoinColumn(name="user_id", insertable = false, updatable=false)
 	private User user;
 	
+	@OneToMany(mappedBy = "userWorkout")
+	private List<UserExercise> userExercises;
+
+	
 	
 
 	public UserWorkout() {
@@ -43,8 +50,8 @@ public class UserWorkout {
 	}
 
 
-
-	public UserWorkout(int id, int userId, int workoutId, String date, int number, User user) {
+	public UserWorkout(int id, int userId, int workoutId, String date, int number, User user,
+			List<UserExercise> userExercises) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -52,7 +59,9 @@ public class UserWorkout {
 		this.date = date;
 		this.number = number;
 		this.user = user;
+		this.userExercises = userExercises;
 	}
+
 
 
 
@@ -62,9 +71,11 @@ public class UserWorkout {
 
 
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 
 
@@ -74,9 +85,11 @@ public class UserWorkout {
 
 
 
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 
 
 
@@ -86,9 +99,11 @@ public class UserWorkout {
 
 
 
+
 	public void setWorkoutId(int workoutId) {
 		this.workoutId = workoutId;
 	}
+
 
 
 
@@ -98,9 +113,11 @@ public class UserWorkout {
 
 
 
+
 	public void setDate(String date) {
 		this.date = date;
 	}
+
 
 
 
@@ -110,9 +127,11 @@ public class UserWorkout {
 
 
 
+
 	public void setNumber(int number) {
 		this.number = number;
 	}
+
 
 
 
@@ -122,9 +141,25 @@ public class UserWorkout {
 
 
 
+
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+
+
+	public List<UserExercise> getUserExercises() {
+		return userExercises;
+	}
+
+
+
+
+	public void setUserExercises(List<UserExercise> userExercises) {
+		this.userExercises = userExercises;
+	}
+
 
 
 
@@ -136,10 +171,12 @@ public class UserWorkout {
 		result = prime * result + id;
 		result = prime * result + number;
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((userExercises == null) ? 0 : userExercises.hashCode());
 		result = prime * result + userId;
 		result = prime * result + workoutId;
 		return result;
 	}
+
 
 
 
@@ -166,6 +203,11 @@ public class UserWorkout {
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
+		if (userExercises == null) {
+			if (other.userExercises != null)
+				return false;
+		} else if (!userExercises.equals(other.userExercises))
+			return false;
 		if (userId != other.userId)
 			return false;
 		if (workoutId != other.workoutId)
@@ -175,10 +217,11 @@ public class UserWorkout {
 
 
 
+
 	@Override
 	public String toString() {
 		return "UserWorkout [id=" + id + ", userId=" + userId + ", workoutId=" + workoutId + ", date=" + date
-				+ ", number=" + number + ", user=" + user + "]";
+				+ ", number=" + number + ", user=" + user + ", userExercises=" + userExercises + "]";
 	}
 
 
