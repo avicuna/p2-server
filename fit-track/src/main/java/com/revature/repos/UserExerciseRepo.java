@@ -13,5 +13,4 @@ public interface UserExerciseRepo extends JpaRepository<UserExercise, Integer>{
 	
 	List<UserExercise> findByUserWorkoutId(int workoutId);
 
-	
 }
