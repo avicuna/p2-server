@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.models.FullWorkout;
 import com.revature.models.User;
 import com.revature.models.UserExercise;
 import com.revature.models.UserWorkout;
@@ -52,12 +51,7 @@ public class UserController {
 		return uws.findUserWorkout(userId);
 	}
 	
-//	@GetMapping("/recent/workout/{userId}")
-//	public UserWorkout findRecentWorkout(@PathVariable int userId) {
-//		
-//		return null;
-//	}
-//		
+	
 	@PostMapping("/login") 
 	public BasicUserProjection login(@RequestBody User u) {
 		return us.login(u.getUsername(), u.getPassword());
@@ -68,14 +62,9 @@ public class UserController {
 		return us.save(user);
 	}
 	
-	@PostMapping("/createworkout")
-	public int postWorkout(@RequestBody FullWorkout fullWorkout) {
-		int id = uws.postWorkout(fullWorkout.getUserWorkout());
-		for (UserExercise exercise: fullWorkout.getExercises() ) {
-			exercise.setUserWorkoutId(id);
-		}
-		ues.postUserExercises(fullWorkout.getExercises());
-		return id;
+	@PostMapping("/workout/create")
+	public int postWorkout(@RequestBody UserWorkout userWorkout) {
+		return uws.postWorkout(userWorkout);
 	}
-	
+		
 }
