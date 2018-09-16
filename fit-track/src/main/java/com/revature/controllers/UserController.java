@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.models.FullWorkout;
 import com.revature.models.User;
 import com.revature.models.UserExercise;
 import com.revature.models.UserWorkout;
 import com.revature.projections.BasicUserProjection;
+import com.revature.services.UserExerciseService;
 import com.revature.services.UserService;
 import com.revature.services.UserWorkoutService;
 
@@ -30,8 +32,7 @@ public class UserController {
 	private UserWorkoutService uws;
 	
 	@Autowired
-	private UserWorkoutService workoutService;
-	
+	private UserExerciseService ues;
 	
 	@GetMapping 
 	public List<User> findAll() {
@@ -48,9 +49,15 @@ public class UserController {
 	@GetMapping("/workouts/{userId}") 
 	public List<UserWorkout> findAllWorkouts(@PathVariable int userId) {
 		System.out.println("finding all user's workouts");
-		return uws.findAllWorkouts(userId);
+		return uws.findUserWorkout(userId);
 	}
-		
+	
+//	@GetMapping("/recent/workout/{userId}")
+//	public UserWorkout findRecentWorkout(@PathVariable int userId) {
+//		
+//		return null;
+//	}
+//		
 	@PostMapping("/login") 
 	public BasicUserProjection login(@RequestBody User u) {
 		return us.login(u.getUsername(), u.getPassword());
@@ -62,9 +69,13 @@ public class UserController {
 	}
 	
 	@PostMapping("/createworkout")
-	public int postWorkout(@RequestBody UserWorkout workout) {
-		
-		return workoutService.postWorkout(workout);
+	public int postWorkout(@RequestBody FullWorkout fullWorkout) {
+		int id = uws.postWorkout(fullWorkout.getUserWorkout());
+		for (UserExercise exercise: fullWorkout.getExercises() ) {
+			exercise.setUserWorkoutId(id);
+		}
+		ues.postUserExercises(fullWorkout.getExercises());
+		return id;
 	}
 	
 }

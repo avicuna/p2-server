@@ -31,5 +31,9 @@ public class UserWorkoutService {
 		
 		return uwr.saveAndFlush(uw).getId();
 	}
+	
+	public List<UserWorkout> findUserWorkout(int userId) {
+		return uwr.findByUserIdOrderByNumberDesc(userId);
+	}
 
 }
