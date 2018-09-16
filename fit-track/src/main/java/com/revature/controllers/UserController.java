@@ -32,9 +32,6 @@ public class UserController {
 	private UserWorkoutService uws;
 	
 	@Autowired
-	private UserWorkoutService workoutService;
-	
-	@Autowired
 	private UserExerciseService ues;
 	
 	@GetMapping 
@@ -52,9 +49,15 @@ public class UserController {
 	@GetMapping("/workouts/{userId}") 
 	public List<UserWorkout> findAllWorkouts(@PathVariable int userId) {
 		System.out.println("finding all user's workouts");
-		return uws.findAllWorkouts(userId);
+		return uws.findUserWorkout(userId);
 	}
-		
+	
+//	@GetMapping("/recent/workout/{userId}")
+//	public UserWorkout findRecentWorkout(@PathVariable int userId) {
+//		
+//		return null;
+//	}
+//		
 	@PostMapping("/login") 
 	public BasicUserProjection login(@RequestBody User u) {
 		return us.login(u.getUsername(), u.getPassword());
@@ -67,7 +70,7 @@ public class UserController {
 	
 	@PostMapping("/createworkout")
 	public int postWorkout(@RequestBody FullWorkout fullWorkout) {
-		int id = workoutService.postWorkout(fullWorkout.getUserWorkout());
+		int id = uws.postWorkout(fullWorkout.getUserWorkout());
 		for (UserExercise exercise: fullWorkout.getExercises() ) {
 			exercise.setUserWorkoutId(id);
 		}

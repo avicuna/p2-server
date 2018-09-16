@@ -10,4 +10,5 @@ public interface UserWorkoutRepo extends JpaRepository<UserWorkout, Integer>{
 	
 	List<UserWorkout> findByUserId(int userId);
 	
+	List<UserWorkout> findByUserIdOrderByNumberDesc(int userId);
 }
