@@ -32,7 +32,6 @@ public class UserWorkout {
 	private int workoutId;
 	@Column(name="date_")
 	java.sql.Date sqlDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-//	private String date;
 	@Column(name="workout_number")
 	private int number;
 	
@@ -45,10 +44,8 @@ public class UserWorkout {
 	private List<UserExercise> userExercises;
 
 	
-	
 	public UserWorkout() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
