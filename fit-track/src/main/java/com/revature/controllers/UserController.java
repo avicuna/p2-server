@@ -66,5 +66,11 @@ public class UserController {
 	public int postWorkout(@RequestBody UserWorkout userWorkout) {
 		return uws.postWorkout(userWorkout);
 	}
+	
+	@PostMapping("/workout/create/exercises")
+	public void postExercises(@RequestBody List<UserExercise> userExercises) {
+		ues.postUserExercises(userExercises);
+	}
+	
 		
 }
