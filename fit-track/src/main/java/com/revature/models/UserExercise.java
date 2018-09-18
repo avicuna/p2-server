@@ -31,22 +31,16 @@ public class UserExercise {
 	@Column(name = "sets_")
 	private int sets;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "exercise_id", insertable=false, updatable=false)
 	private Exercise exercise;
-	
-	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_workout_id", insertable = false, updatable=false)
-	private UserWorkout userWorkout;
 	
 	public UserExercise() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserExercise(int id, int userWorkoutId, int exerciseId, int weight, int reps, int sets, Exercise exercise,
-			UserWorkout userWorkout) {
+	public UserExercise(int id, int userWorkoutId, int exerciseId, int weight, int reps, int sets, Exercise exercise) {
 		super();
 		this.id = id;
 		this.userWorkoutId = userWorkoutId;
@@ -55,73 +49,109 @@ public class UserExercise {
 		this.reps = reps;
 		this.sets = sets;
 		this.exercise = exercise;
-		this.userWorkout = userWorkout;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the userWorkoutId
+	 */
 	public int getUserWorkoutId() {
 		return userWorkoutId;
 	}
 
+	/**
+	 * @param userWorkoutId the userWorkoutId to set
+	 */
 	public void setUserWorkoutId(int userWorkoutId) {
 		this.userWorkoutId = userWorkoutId;
 	}
 
+	/**
+	 * @return the exerciseId
+	 */
 	public int getExerciseId() {
 		return exerciseId;
 	}
 
+	/**
+	 * @param exerciseId the exerciseId to set
+	 */
 	public void setExerciseId(int exerciseId) {
 		this.exerciseId = exerciseId;
 	}
 
+	/**
+	 * @return the weight
+	 */
 	public int getWeight() {
 		return weight;
 	}
 
+	/**
+	 * @param weight the weight to set
+	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
+	/**
+	 * @return the reps
+	 */
 	public int getReps() {
 		return reps;
 	}
 
+	/**
+	 * @param reps the reps to set
+	 */
 	public void setReps(int reps) {
 		this.reps = reps;
 	}
 
+	/**
+	 * @return the sets
+	 */
 	public int getSets() {
 		return sets;
 	}
 
+	/**
+	 * @param sets the sets to set
+	 */
 	public void setSets(int sets) {
 		this.sets = sets;
 	}
 
+	/**
+	 * @return the exercise
+	 */
 	public Exercise getExercise() {
 		return exercise;
 	}
 
+	/**
+	 * @param exercise the exercise to set
+	 */
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
 	}
 
-	public UserWorkout getUserWorkout() {
-		return userWorkout;
-	}
-
-	public void setUserWorkout(UserWorkout userWorkout) {
-		this.userWorkout = userWorkout;
-	}
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,12 +161,14 @@ public class UserExercise {
 		result = prime * result + id;
 		result = prime * result + reps;
 		result = prime * result + sets;
-		result = prime * result + ((userWorkout == null) ? 0 : userWorkout.hashCode());
 		result = prime * result + userWorkoutId;
 		result = prime * result + weight;
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -159,11 +191,6 @@ public class UserExercise {
 			return false;
 		if (sets != other.sets)
 			return false;
-		if (userWorkout == null) {
-			if (other.userWorkout != null)
-				return false;
-		} else if (!userWorkout.equals(other.userWorkout))
-			return false;
 		if (userWorkoutId != other.userWorkoutId)
 			return false;
 		if (weight != other.weight)
@@ -171,13 +198,14 @@ public class UserExercise {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "UserExercise [id=" + id + ", userWorkoutId=" + userWorkoutId + ", exerciseId=" + exerciseId
-				+ ", weight=" + weight + ", reps=" + reps + ", sets=" + sets + ", exercise=" + exercise
-				+ ", userWorkout=" + userWorkout + "]";
+				+ ", weight=" + weight + ", reps=" + reps + ", sets=" + sets + ", exercise=" + exercise + "]";
 	}
 
-	
 	
 }

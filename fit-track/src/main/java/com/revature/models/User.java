@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user", schema="gt")
 public class User {
@@ -29,7 +31,8 @@ public class User {
 	private int weight;
 	private String gender;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "userId")
+//	@JsonIgnore
 	private List<UserWorkout> userWorkouts;
 
 

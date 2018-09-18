@@ -1,17 +1,12 @@
 package com.revature.models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -27,22 +22,17 @@ public class Exercise {
 	private String description;
 	private String type;
 	
-	@OneToMany(mappedBy="exercise")
-	@JsonIgnore
-	private List<UserExercise> userExercise;
-	
 	public Exercise() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Exercise(int id, String name, String description, String type, List<UserExercise> userExercise) {
+	public Exercise(int id, String name, String description, String type) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.type = type;
-		this.userExercise = userExercise;
 	}
 
 	/**
@@ -101,20 +91,6 @@ public class Exercise {
 		this.type = type;
 	}
 
-	/**
-	 * @return the userExercise
-	 */
-	public List<UserExercise> getUserExercise() {
-		return userExercise;
-	}
-
-	/**
-	 * @param userExercise the userExercise to set
-	 */
-	public void setUserExercise(List<UserExercise> userExercise) {
-		this.userExercise = userExercise;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -126,7 +102,6 @@ public class Exercise {
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((userExercise == null) ? 0 : userExercise.hashCode());
 		return result;
 	}
 
@@ -159,11 +134,6 @@ public class Exercise {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (userExercise == null) {
-			if (other.userExercise != null)
-				return false;
-		} else if (!userExercise.equals(other.userExercise))
-			return false;
 		return true;
 	}
 
@@ -172,8 +142,7 @@ public class Exercise {
 	 */
 	@Override
 	public String toString() {
-		return "Exercise [id=" + id + ", name=" + name + ", description=" + description + ", type=" + type
-				+ ", userExercise=" + userExercise + "]";
+		return "Exercise [id=" + id + ", name=" + name + ", description=" + description + ", type=" + type + "]";
 	}
 
 	
