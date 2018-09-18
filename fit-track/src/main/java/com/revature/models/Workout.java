@@ -24,8 +24,8 @@ public class Workout {
 	
 	public Workout() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
 	public Workout(int id, String name, String description) {
 		super();
 		this.id = id;
