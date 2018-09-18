@@ -29,7 +29,7 @@ public class User {
 	private int weight;
 	private String gender;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "userId")
 	private List<UserWorkout> userWorkouts;
 
 

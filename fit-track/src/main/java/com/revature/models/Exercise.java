@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -32,7 +31,6 @@ public class Exercise {
 	
 	public Exercise() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Exercise(int id, String name, String description, String type, List<UserExercise> userExercise) {

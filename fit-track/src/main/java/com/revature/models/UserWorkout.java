@@ -6,16 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -35,12 +31,7 @@ public class UserWorkout {
 	@Column(name="workout_number")
 	private int number;
 	
-	@JsonIgnore
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_id", insertable = false, updatable=false)
-	private User user;
-	
-	@OneToMany(mappedBy = "userWorkout")
+	@OneToMany(mappedBy = "userWorkoutId")
 	private List<UserExercise> userExercises;
 
 	
@@ -49,105 +40,116 @@ public class UserWorkout {
 	}
 
 
-
-	public UserWorkout(int id, int userId, int workoutId, Date sqlDate, int number, User user,
-			List<UserExercise> userExercises) {
+	public UserWorkout(int id, int userId, int workoutId, Date sqlDate, int number, List<UserExercise> userExercises) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.workoutId = workoutId;
 		this.sqlDate = sqlDate;
 		this.number = number;
-		this.user = user;
 		this.userExercises = userExercises;
 	}
 
 
-
+	/**
+	 * @return the id
+	 */
 	public int getId() {
 		return id;
 	}
 
 
-
+	/**
+	 * @param id the id to set
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 
-
+	/**
+	 * @return the userId
+	 */
 	public int getUserId() {
 		return userId;
 	}
 
 
-
+	/**
+	 * @param userId the userId to set
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
 
-
+	/**
+	 * @return the workoutId
+	 */
 	public int getWorkoutId() {
 		return workoutId;
 	}
 
 
-
+	/**
+	 * @param workoutId the workoutId to set
+	 */
 	public void setWorkoutId(int workoutId) {
 		this.workoutId = workoutId;
 	}
 
 
-
+	/**
+	 * @return the sqlDate
+	 */
 	public java.sql.Date getSqlDate() {
 		return sqlDate;
 	}
 
 
-
+	/**
+	 * @param sqlDate the sqlDate to set
+	 */
 	public void setSqlDate(java.sql.Date sqlDate) {
 		this.sqlDate = sqlDate;
 	}
 
 
-
+	/**
+	 * @return the number
+	 */
 	public int getNumber() {
 		return number;
 	}
 
 
-
+	/**
+	 * @param number the number to set
+	 */
 	public void setNumber(int number) {
 		this.number = number;
 	}
 
 
-
-	public User getUser() {
-		return user;
-	}
-
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-
-
+	/**
+	 * @return the userExercises
+	 */
 	public List<UserExercise> getUserExercises() {
 		return userExercises;
 	}
 
 
-
+	/**
+	 * @param userExercises the userExercises to set
+	 */
 	public void setUserExercises(List<UserExercise> userExercises) {
 		this.userExercises = userExercises;
 	}
 
 
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -155,7 +157,6 @@ public class UserWorkout {
 		result = prime * result + id;
 		result = prime * result + number;
 		result = prime * result + ((sqlDate == null) ? 0 : sqlDate.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((userExercises == null) ? 0 : userExercises.hashCode());
 		result = prime * result + userId;
 		result = prime * result + workoutId;
@@ -163,7 +164,9 @@ public class UserWorkout {
 	}
 
 
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -182,11 +185,6 @@ public class UserWorkout {
 				return false;
 		} else if (!sqlDate.equals(other.sqlDate))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
 		if (userExercises == null) {
 			if (other.userExercises != null)
 				return false;
@@ -200,13 +198,14 @@ public class UserWorkout {
 	}
 
 
-
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "UserWorkout [id=" + id + ", userId=" + userId + ", workoutId=" + workoutId + ", sqlDate=" + sqlDate
-				+ ", number=" + number + ", user=" + user + ", userExercises=" + userExercises + "]";
+				+ ", number=" + number + ", userExercises=" + userExercises + "]";
 	}
 
 
-	
 }
