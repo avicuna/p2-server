@@ -26,7 +26,6 @@ public class Exercise {
 	private String type;
 	
 	@OneToMany(mappedBy="exercise")
-	@JsonIgnore
 	private List<UserExercise> userExercise;
 	
 	public Exercise() {
