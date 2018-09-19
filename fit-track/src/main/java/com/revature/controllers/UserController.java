@@ -39,18 +39,11 @@ public class UserController {
 		return us.findAll();
 	}
 	
-	@GetMapping("/workout/{workoutId}")
-	public List<UserExercise> findWorkoutExercises(@PathVariable int workoutId) {
-		System.out.println("finding user's workout exercises");
-		return uws.findWorkoutExercises(workoutId);
-	}
-	
-	@GetMapping("/workouts/{userId}") 
+	@GetMapping("/{userId}/workouts") 
 	public List<UserWorkout> findAllWorkouts(@PathVariable int userId) {
 		System.out.println("finding all user's workouts");
 		return uws.findUserWorkout(userId);
 	}
-	
 	
 	@PostMapping("/login") 
 	public BasicUserProjection login(@RequestBody User u) {

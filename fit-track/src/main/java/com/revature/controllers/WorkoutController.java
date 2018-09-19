@@ -24,4 +24,5 @@ public class WorkoutController {
 		System.out.println("finding all workouts");
 		return ws.findAll();
 	}
+	
 }
