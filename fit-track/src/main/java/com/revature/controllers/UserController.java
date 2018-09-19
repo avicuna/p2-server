@@ -3,6 +3,8 @@ package com.revature.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +48,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/login") 
-	public BasicUserProjection login(@RequestBody User u) {
-		return us.login(u.getUsername(), u.getPassword());
+	public ResponseEntity<BasicUserProjection> login(@RequestBody User u) {
+		System.out.println("logging in");
+		if(us.login(u.getUsername(), u.getPassword()) == null) {
+			ResponseEntity<BasicUserProjection> re = new ResponseEntity<BasicUserProjection>(us.login(u.getUsername(), u.getPassword()), HttpStatus.NOT_FOUND);
+			return re;
+		}
+		ResponseEntity<BasicUserProjection> re = new ResponseEntity<BasicUserProjection>(us.login(u.getUsername(), u.getPassword()), HttpStatus.OK);
+		return re;
 	}
 
 	@PostMapping
