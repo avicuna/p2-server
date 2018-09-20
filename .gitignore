@@ -26,3 +26,10 @@ dependency-reduced-pom.xml
 .project
 .settings/
 
+fit-track/src/main/java/com/revature/models/Exercise_BACKUP_2164.java
+fit-track/src/main/java/com/revature/models/Exercise_BASE_2021.java
+fit-track/src/main/java/com/revature/models/Exercise_BASE_2164.java
+fit-track/src/main/java/com/revature/models/Exercise_LOCAL_2021.java
+fit-track/src/main/java/com/revature/models/Exercise_LOCAL_2164.java
+fit-track/src/main/java/com/revature/models/Exercise_REMOTE_2021.java
+fit-track/src/main/java/com/revature/models/Exercise_REMOTE_2164.java
