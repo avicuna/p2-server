@@ -28,16 +28,16 @@ public class UserController {
 	
 	@Autowired
 	private UserService us;
-	
-	@Autowired
-	private UserWorkoutService uws;
-	
-	@Autowired
-	private UserExerciseService ues;
-	
-	@GetMapping 
-	public List<User> findAll() {
-		System.out.println("finding all users");
+
+		@Autowired
+		private UserWorkoutService uws;
+
+		@Autowired
+		private UserExerciseService ues;
+
+		@GetMapping
+		public List<User> findAll() {
+			System.out.println("finding all users");
 		return us.findAll();
 	}
 	
