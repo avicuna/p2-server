@@ -46,9 +46,7 @@ public class UserService {
 			}
 			ur.saveAndFlush(user);
 		});
-			return oldUser;
-
-				
+			return oldUser;				
 	}
 	
 	public BasicUserProjection login(String username, String password) {
